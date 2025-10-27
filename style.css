@@ -7,9 +7,11 @@
   --Slate-500: hsl(200, 26%, 54%);
   --Slate-700: hsl(200, 24%, 40%);
   --Slate-900: hsl(202, 55%, 16%);
-
+  --Slate-dk: hsl(202, 56%, 12%);
   /* Primary colors */
   --Lime: hsl(61, 70%, 52%);
+  --Lime-hover: hsl(62, 72%, 76%);
+
   --Red: hsl(4, 69%, 50%);
 }
 * {
@@ -18,15 +20,40 @@
   padding: 0;
   box-sizing: border-box;
 }
+.hide {
+  display: none;
+}
 body {
   background-color: var(--Slate-100);
   color: var(--Slate-900);
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center; 
   align-items: center;
   height: 100vh;
   overflow: hidden;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.3rem;
+}
+header h1 {
+  font-size: 1.1rem;
+  color: var(--Slate-900);
+}
+.attribution {
+  font-size: 11px;
+  text-align: center;
+  color: var(--Slate-500);
+}
+.attribution a {
+  color: var(--Slate-500);
+}
+.attribution a:hover {
+  color: var(--Slate-700);
+  text-decoration: none;
 }
 .container {
   background-color: var(--White);
@@ -40,21 +67,11 @@ body {
   align-items: flex-start;
   overflow: hidden;
 }
-.calculator,
+.form,
 .right {
   flex: 1;
   width: 100%;
-  padding: 1rem 2rem 2rem;
-}
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.7rem;
-}
-h1 {
-  font-size: 1.1rem;
-  color: var(--Slate-900);
+  padding: 2rem;
 }
 .clear {
   border: none;
@@ -75,37 +92,181 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin: 0.85rem 0;
+  margin: 0.85rem 0 0.3rem;
   position: relative;
+  overflow: hidden;
 }
 label {
-  font-size: 0.8rem;
-  color: var(--Slate-500);
+  color: var(--Slate-700);
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 input {
-  border: 2px solid var(--Slate-900);
+  border: 2px solid var(--Slate-500);
   outline: none;
   border-radius: 0.3rem;
-  padding: 0.5rem;
+  padding: 0.7rem 1rem;
   font-size: 1rem;
   font-weight: 900;
   color: var(--Slate-900);
-  background: none;
+  background: transparent;
   transition: all 0.3s ease;
+  width: 100%;
+  z-index: 1;
 }
-input:focus {
-  border-color: var(--Lime);
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-.attribution {
-  font-size: 11px;
+.sign {
+  position: absolute;
+  top: -4px;
+  left: 0%;
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--Slate-900);
+  padding: 1em;
+  background: var(--Slate-100);
+}
+.amt-Inp {
+  padding-left: 3.5em;
+}
+.term-div {
+  position: relative;
+  overflow: hidden;
+}
+.mort {
+  position: relative;
+  padding-right: 4.5em;
+}
+.yr {
+  position: absolute;
+  top: -5px;
+  right: 0%;
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--Slate-900);
+  padding: 1em;
+  background: var(--Slate-100);
+}
+.amt-Inp:focus ~ .sign,
+.mort:focus ~ .yr {
+  background: var(--Lime);
+}
+.term-rate {
+  display: flex;
+  gap: 1rem;
+}
+
+/* FOR CUSTOM RADIO */
+.custom-radio {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--Slate-900);
+
+  border: 2px solid var(--Slate-500);
+  padding: 0.7rem 1rem;
+  border-radius: 0.3rem;
+}
+.custom-radio input[type="radio"] {
+  display: none;
+}
+.radio-mark {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--Slate-500);
+  border-radius: 50%;
+  margin-right: 10px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.custom-radio input[type="radio"]:checked + .radio-mark {
+  border-color: var(--Lime);
+}
+.custom-radio input[type="radio"]:checked + .radio-mark::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: var(--Lime);
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+.btn {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.8rem 2rem;
+  margin-top: 2rem;
+  background-color: var(--Lime);
+  border: none;
+  border-radius: 2rem;
+  color: var(--Slate-900);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn:hover {
+  background-color: var(--Lime-hover);
+}
+.right {
+  color: var(--Slate-100);
+  background: var(--Slate-900);
+  height: 100%;
+  border-radius: 0 0 0 5rem;
+}
+.right h1 {
+  font-size: 1.1rem;
+}
+.right main > p,
+.show-here p {
+  font-size: 0.8rem;
+  font-weight: 100;
+  line-height: 1.25rem;
+  margin: 1rem 0;
+}
+.right .show-amount {
+  background: var(--Slate-dk);
+  border-top: 4px solid var(--Lime);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.show-amount p {
+  font-size: 0.8rem;
+  font-weight: 100;
+}
+.show-amount p:nth-child(2) {
+  padding: 2rem 0 0;
+  border-top: 1px solid var(--Slate-700);
+}
+.show-amount .result {
+  display: block;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  color: var(--Lime);
+}
+.show-amount .total-repayment {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+.show-here {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  color: var(--Slate-500);
-}
-.attribution a {
-  color: var(--Slate-500);
-}
-.attribution a:hover {
-  color: var(--Slate-700);
-  text-decoration: none;
+  height: 100%;
 }

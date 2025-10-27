@@ -17,48 +17,53 @@
   </head>
   <body>
     <main class="container">
-      <form action="" class="calculator">
+      <form action="" class="form">
         <header>
           <h1>Mortgage Calculator</h1>
           <button class="clear">Clear All</button>
         </header>
+        <label for="mortAmount">Mortgage Amount</label>
         <div class="amount">
-          <label for="mortAmount">Mortgage Amount</label>
-          <input type="number" id="mortAmount" />
+          <input type="number" id="mortAmount" class="amt-Inp" />
+          <span class="sign">£</span>
         </div>
 
         <div class="term-rate">
           <span class="terms">
             <label for="mortTerms">Mortgage Term</label>
-            <input type="number" id="mortTerms" />
+            <div class="term-div">
+              <input type="number" id="mortTerms" class="mort" />
+              <span class="yr">years</span>
+            </div>
           </span>
 
           <span class="rate">
-            <label for="mortRate">Mortgage Rate</label>
-            <input type="number" id="mortRate" />
+            <label for="mortRate">Interest Rate</label>
+            <div class="term-div">
+              <input type="number" id="mortRate" class="mort" />
+              <span class="yr">%</span>
+            </div>
           </span>
         </div>
         <section class="interest-rate">
-          <div>
-            <label for="mortInterest">Mortgage Type Repayment</label>
+          <label for="mortgage">Mortgage Type</label>
+
+          <label class="custom-radio">
             <input
               type="radio"
-              id="mortInterest"
-              name="mortInterest"
+              name="mortgage"
               value="Repayment"
               checked
-            />
-          </div>
+            /><span class="radio-mark"></span>
+            Repayment
+          </label>
 
-          <div>
-            <label for="interestOnly">Interest Only</label>
-            <input
-              type="radio"
-              id="interestOnly"
-              name="interestOnly"
-              value="Interest Only"
-            />
-          </div>
+          <label class="custom-radio">
+            <input type="radio" name="mortgage" value="interest-only" /><span
+              class="radio-mark"
+            ></span>
+            Interest Only
+          </label>
         </section>
         <button class="btn">
           <img src="/assets/images/icon-calculator.svg" alt="" />Calculate
@@ -68,29 +73,37 @@
 
       <!-- Empty results start -->
 
-      <!-- Results shown here Complete the form and click “calculate repayments” to see
-      what your monthly repayments would be. -->
+      <!--  -->
 
       <!-- Empty results end -->
 
       <!-- Completed results start -->
       <section class="right">
-        <h1>Your results</h1>
-        <p>
-          Your results are shown below based on the information you provided. To
-          adjust the results, edit the form and click “calculate repayments”
-          again.
-        </p>
+        <main class="hide">
+          <h1>Your results</h1>
+          <p>
+            Your results are shown below based on the information you provided.
+            To adjust the results, edit the form and click “calculate
+            repayments” again.
+          </p>
 
-        <div class="show-amount">
-          <p>
-            Your monthly repayments: <span class="monthly-repayment"></span>
-          </p>
-          <p>
-            Total you'll repay over the term:
-            <span class="total-repayment"></span>
-          </p>
-        </div>
+          <div class="show-amount">
+            <p>
+              Your monthly repayments
+               <span class="result">£0.00</span>
+            </p>
+            <p>
+              Total you'll repay over the term:
+              <span class="total-repayment">£0.00</span>
+            </p>
+          </div>
+        </main>
+        <main class="show-here">
+        <img src="/assets/images/illustration-empty.svg" alt="" class="empty">
+        <h1>Results shown here</h1>
+        <p>Complete the form and click “calculate repayments” to see
+      what your monthly repayments would be.</p>
+         </main>
       </section>
     </main>
 
