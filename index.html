@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+
+    <title>Frontend Mentor | Mortgage repayment calculator</title>
+  </head>
+  <body>
+    <main class="container">
+      <form action="" class="calculator">
+        <header>
+          <h1>Mortgage Calculator</h1>
+          <button class="clear">Clear All</button>
+        </header>
+        <div class="amount">
+          <label for="mortAmount">Mortgage Amount</label>
+          <input type="number" id="mortAmount" />
+        </div>
+
+        <div class="term-rate">
+          <span class="terms">
+            <label for="mortTerms">Mortgage Term</label>
+            <input type="number" id="mortTerms" />
+          </span>
+
+          <span class="rate">
+            <label for="mortRate">Mortgage Rate</label>
+            <input type="number" id="mortRate" />
+          </span>
+        </div>
+        <section class="interest-rate">
+          <div>
+            <label for="mortInterest">Mortgage Type Repayment</label>
+            <input
+              type="radio"
+              id="mortInterest"
+              name="mortInterest"
+              value="Repayment"
+              checked
+            />
+          </div>
+
+          <div>
+            <label for="interestOnly">Interest Only</label>
+            <input
+              type="radio"
+              id="interestOnly"
+              name="interestOnly"
+              value="Interest Only"
+            />
+          </div>
+        </section>
+        <button class="btn">
+          <img src="/assets/images/icon-calculator.svg" alt="" />Calculate
+          Repayments
+        </button>
+      </form>
+
+      <!-- Empty results start -->
+
+      <!-- Results shown here Complete the form and click “calculate repayments” to see
+      what your monthly repayments would be. -->
+
+      <!-- Empty results end -->
+
+      <!-- Completed results start -->
+      <section class="right">
+        <h1>Your results</h1>
+        <p>
+          Your results are shown below based on the information you provided. To
+          adjust the results, edit the form and click “calculate repayments”
+          again.
+        </p>
+
+        <div class="show-amount">
+          <p>
+            Your monthly repayments: <span class="monthly-repayment"></span>
+          </p>
+          <p>
+            Total you'll repay over the term:
+            <span class="total-repayment"></span>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Completed results end -->
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+      Coded by <a href="#">Your Name Here</a>.
+    </div>
+  </body>
+</html>
