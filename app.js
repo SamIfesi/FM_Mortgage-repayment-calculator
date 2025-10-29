@@ -6,7 +6,11 @@ const btn = document.getElementById("btn");
 const showHere = document.getElementById("showHere");
 const model = document.querySelector(".model-container");
 const resultSection = document.getElementById("resultSection");
-const dangerAlert = document.querySelectorAll(".danger");
+const signs = document.querySelectorAll(".sign");
+const inputContainers = document.querySelectorAll(".input-container");
+console.log(inputContainers);
+
+const errMsgs = document.querySelectorAll(".err");
 
 const result = document.getElementById("result");
 const total = document.getElementById("total");
@@ -26,8 +30,8 @@ const formatter = new Intl.NumberFormat("en-NG", {
 
 btn.addEventListener("click", (e) => {
   e.preventDefault();
-  resultSection.classList.remove("hide");
-  showHere.classList.add("hide");
+  resultSection.classList.remove("show");
+  showHere.classList.add("show");
 
   const type = document.querySelector('input[type="radio"]:checked').value;
   const amountValue = parseFloat(amount.value.trim());
@@ -42,20 +46,26 @@ btn.addEventListener("click", (e) => {
     termValue <= 0 ||
     rateValue < 0
   ) {
-    resultSection.classList.add("hide");
-    showHere.classList.remove("hide");
-    dangerAlert.forEach((danger) => {
-      danger.classList.add("red-bg");
+    resultSection.classList.add("show");
+    showHere.classList.remove("show");
+    signs.forEach((sign) => {
+      sign.classList.add("red-bg");
     });
-
-    model.textContent = "Please enter valid positive numbers.";
-    model.classList.add("active");
+    inputContainers.forEach((inputContainer) => {
+      inputContainer.classList.add("red-border");
+    });
+    errMsgs.forEach((errMsg) => {
+      errMsg.classList.add("active");
+    });
     setTimeout(() => {
-      model.classList.remove("active");
-    }, 3000);
-    setTimeout(() => {
-      dangerAlert.forEach((danger) => {
-        danger.classList.remove("red-bg");
+      signs.forEach((sign) => {
+        sign.classList.remove("red-bg");
+      });
+      inputContainers.forEach((inputContainer) => {
+        inputContainer.classList.remove("red-border");
+      });
+      errMsgs.forEach((errMsg) => {
+        errMsg.classList.remove("active");
       });
     }, 4000);
     return;
@@ -65,21 +75,26 @@ btn.addEventListener("click", (e) => {
   let monthlyPayment = 0;
   let totalRepayment = 0;
 
-  if (type === "Repayment") {
+  if (type === "repayment") {
     const monthlyRate = rateValue / 12;
 
     if (monthlyRate === 0) {
       monthlyPayment = amountValue / months;
-
       totalRepayment = amountValue;
     } else {
       monthlyPayment =
         (amountValue * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
       totalRepayment = monthlyPayment * months;
     }
-  } else if (type === "Interest only") {
-    monthlyPayment = amountValue * (rateValue / 12);
-    totalRepayment = monthlyPayment * months;
+  } else if (type === "interest only") {
+    const monthlyRate = rateValue / 12;
+    if (monthlyRate === 0) {
+      monthlyPayment = 0;
+      totalRepayment = amountValue;
+    } else {
+      monthlyPayment = amountValue * (rateValue / 12);
+      totalRepayment = amountValue + monthlyPayment * months;
+    }
   }
 
   const formattedMonthly = formatter.format(monthlyPayment);
