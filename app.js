@@ -8,10 +8,7 @@ const model = document.querySelector(".model-container");
 const resultSection = document.getElementById("resultSection");
 const signs = document.querySelectorAll(".sign");
 const inputContainers = document.querySelectorAll(".input-container");
-console.log(inputContainers);
-
 const errMsgs = document.querySelectorAll(".err");
-
 const result = document.getElementById("result");
 const total = document.getElementById("total");
 
@@ -22,7 +19,7 @@ clrMsg.addEventListener("click", (e) => {
   rate.value = "";
 });
 
-const formatter = new Intl.NumberFormat("en-NG", {
+const formatter = new Intl.NumberFormat("en-GBP", {
   style: "currency",
   currency: "GBP",
   minimumFractionDigits: 2,
@@ -42,6 +39,39 @@ btn.addEventListener("click", (e) => {
     isNaN(amountValue) ||
     isNaN(termValue) ||
     isNaN(rateValue) ||
+    amountValue.length == 0 ||
+    termValue.length == 0 ||
+    rateValue.length == 0
+  ) {
+    resultSection.classList.add("show");
+    showHere.classList.remove("show");
+    signs.forEach((sign) => {
+      sign.classList.add("red-bg");
+    });
+    inputContainers.forEach((inputContainer) => {
+      inputContainer.classList.add("red-border");
+    });
+    errMsgs.forEach((errMsg) => {
+      errMsg.classList.add("active");
+      errMsg.textContent = "This field is required";
+    });
+    setTimeout(() => {
+      signs.forEach((sign) => {
+        sign.classList.remove("red-bg");
+      });
+      inputContainers.forEach((inputContainer) => {
+        inputContainer.classList.remove("red-border");
+      });
+      errMsgs.forEach((errMsg) => {
+        errMsg.classList.remove("active");
+        errMsg.textContent = "This field is required";
+      });
+    }, 4000);
+    return;
+  } else if (
+    isNaN(amountValue) ||
+    isNaN(termValue) ||
+    isNaN(rateValue) ||
     amountValue <= 0 ||
     termValue <= 0 ||
     rateValue < 0
@@ -56,6 +86,7 @@ btn.addEventListener("click", (e) => {
     });
     errMsgs.forEach((errMsg) => {
       errMsg.classList.add("active");
+      errMsg.textContent = "Use a positive number";
     });
     setTimeout(() => {
       signs.forEach((sign) => {
@@ -66,6 +97,7 @@ btn.addEventListener("click", (e) => {
       });
       errMsgs.forEach((errMsg) => {
         errMsg.classList.remove("active");
+        errMsg.textContent = "Use a positive number";
       });
     }, 4000);
     return;

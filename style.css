@@ -36,10 +36,6 @@ header {
   justify-content: space-between;
   margin-bottom: 1.3rem;
 }
-header h1 {
-  font-size: 1.1rem;
-  color: var(--Slate-900);
-}
 .attribution {
   font-size: 11px;
   text-align: center;
@@ -51,6 +47,10 @@ header h1 {
 .attribution a:hover {
   color: var(--Slate-700);
   text-decoration: none;
+}
+header h1 {
+  font-size: 1.1rem;
+  color: var(--Slate-900);
 }
 .container {
   background-color: var(--White);
@@ -220,6 +220,8 @@ input:focus ~ .sign {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  width: 100%;
+  max-width: 20rem;
 }
 .show-amount p {
   font-size: 0.8rem;
@@ -256,7 +258,7 @@ input:focus ~ .sign {
 }
 .err {
   color: var(--Red);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   max-height: 0;
   opacity: 0;
   overflow: hidden;
