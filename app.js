@@ -19,7 +19,7 @@ clrMsg.addEventListener("click", (e) => {
   rate.value = "";
 });
 
-const formatter = new Intl.NumberFormat("en-GBP", {
+const formatter = new Intl.NumberFormat("en-GB", {
   style: "currency",
   currency: "GBP",
   minimumFractionDigits: 2,
@@ -68,40 +68,41 @@ btn.addEventListener("click", (e) => {
       });
     }, 4000);
     return;
-  } else if (
-    isNaN(amountValue) ||
-    isNaN(termValue) ||
-    isNaN(rateValue) ||
-    amountValue <= 0 ||
-    termValue <= 0 ||
-    rateValue < 0
-  ) {
-    resultSection.classList.add("show");
-    showHere.classList.remove("show");
-    signs.forEach((sign) => {
-      sign.classList.add("red-bg");
-    });
-    inputContainers.forEach((inputContainer) => {
-      inputContainer.classList.add("red-border");
-    });
-    errMsgs.forEach((errMsg) => {
-      errMsg.classList.add("active");
-      errMsg.textContent = "Use a positive number";
-    });
-    setTimeout(() => {
+  }
+   else if (
+      isNaN(amountValue) ||
+      isNaN(termValue) ||
+      isNaN(rateValue) ||
+      amountValue <= 0 ||
+      termValue <= 0 ||
+      rateValue < 0
+    ) {
+      resultSection.classList.add("show");
+      showHere.classList.remove("show");
       signs.forEach((sign) => {
-        sign.classList.remove("red-bg");
+        sign.classList.add("red-bg");
       });
       inputContainers.forEach((inputContainer) => {
-        inputContainer.classList.remove("red-border");
+        inputContainer.classList.add("red-border");
       });
       errMsgs.forEach((errMsg) => {
-        errMsg.classList.remove("active");
+        errMsg.classList.add("active");
         errMsg.textContent = "Use a positive number";
       });
-    }, 4000);
-    return;
-  }
+      setTimeout(() => {
+        signs.forEach((sign) => {
+          sign.classList.remove("red-bg");
+        });
+        inputContainers.forEach((inputContainer) => {
+          inputContainer.classList.remove("red-border");
+        });
+        errMsgs.forEach((errMsg) => {
+          errMsg.classList.remove("active");
+          errMsg.textContent = "Use a positive number";
+        });
+      }, 4000);
+      return;
+    }
 
   const months = termValue * 12;
   let monthlyPayment = 0;
