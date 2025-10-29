@@ -3,8 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
-
     <link
       rel="icon"
       type="image/png"
@@ -24,11 +22,11 @@
           <h1>Mortgage Calculator</h1>
           <button class="clear" id="clear">Clear All</button>
         </header>
-        <label for="mortAmount">Mortgage Amount</label>
+        <label>Mortgage Amount</label>
         <div class="amount">
           <input
             type="number"
-            id="mortAmount"
+            id="amount"
             class="amt-Inp"
             min="0"
             step="1"
@@ -42,7 +40,7 @@
             <div class="term-div">
               <input
                 type="number"
-                id="mortTerms"
+                id="term"
                 class="mort"
                 min="0"
                 step="1"
@@ -56,7 +54,7 @@
             <div class="term-div">
               <input
                 type="number"
-                id="mortRate"
+                id="rate"
                 class="mort"
                 min="0"
                 step="1"
@@ -79,7 +77,7 @@
           </label>
 
           <label class="custom-radio">
-            <input type="radio" name="mortgage" value="interest-only" /><span
+            <input type="radio" name="mortgage" value="Interest only" /><span
               class="radio-mark"
             ></span>
             Interest Only
@@ -103,11 +101,11 @@
           <div class="show-amount">
             <p>
               Your monthly repayments
-              <span class="result">£0.00</span>
+              <span class="result" id="result"></span>
             </p>
             <p>
               Total you'll repay over the term:
-              <span class="total-repayment">£0.00</span>
+              <span class="total-repayment" id="total"></span>
             </p>
           </div>
         </main>
@@ -125,13 +123,10 @@
         </main>
       </section>
     </main>
-
-    <!-- Completed results end -->
-
     <div class="attribution">
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
-      Coded by <a href="#">Your Name Here</a>.
+      Coded by <a href="https://github.com/SamIfesi" target="_blank">Eke, Ifesinachi Samrose</a>.
     </div>
     <script src="app.js"></script>
   </body>

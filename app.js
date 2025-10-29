@@ -1,40 +1,53 @@
 const clrMsg = document.getElementById("clear");
-const mortAmount = document.getElementById("mortAmount");
-const mortTerms = document.getElementById("mortTerms");
-const mortRate = document.getElementById("mortRate");
+const amount = document.getElementById("amount");
+const term = document.getElementById("term");
+const rate = document.getElementById("rate");
 const btn = document.getElementById("btn");
-const resultSection = document.getElementById("resultSection");
 const showHere = document.getElementById("showHere");
-const dangerAlert = document.querySelectorAll(".danger");
 const model = document.querySelector(".model-container");
-console.log(dangerAlert);
+const resultSection = document.getElementById("resultSection");
+const dangerAlert = document.querySelectorAll(".danger");
+
+const result = document.getElementById("result");
+const total = document.getElementById("total");
 
 clrMsg.addEventListener("click", (e) => {
   e.preventDefault();
-  mortAmount.value = "";
-  mortTerms.value = "";
-  mortRate.value = "";
+  amount.value = "";
+  term.value = "";
+  rate.value = "";
 });
+
+const formatter = new Intl.NumberFormat("en-NG", {
+  style: "currency",
+  currency: "GBP",
+  minimumFractionDigits: 2,
+});
+
 btn.addEventListener("click", (e) => {
   e.preventDefault();
   resultSection.classList.remove("hide");
   showHere.classList.add("hide");
 
-  const mtAmtValue = mortAmount.value.trim();
-  const mtTermsValue = mortTerms.value.trim();
-  const mtRateValue = mortRate.value.trim();
+  const type = document.querySelector('input[type="radio"]:checked').value;
+  const amountValue = parseFloat(amount.value.trim());
+  const termValue = parseFloat(term.value.trim());
+  const rateValue = parseFloat(rate.value.trim()) / 100;
 
   if (
-    Number(mtAmtValue) <= 0 ||
-    Number(mtTermsValue) <= 0 ||
-    Number(mtRateValue) <= 0
+    isNaN(amountValue) ||
+    isNaN(termValue) ||
+    isNaN(rateValue) ||
+    amountValue <= 0 ||
+    termValue <= 0 ||
+    rateValue < 0
   ) {
     resultSection.classList.add("hide");
     showHere.classList.remove("hide");
-
     dangerAlert.forEach((danger) => {
       danger.classList.add("red-bg");
     });
+
     model.textContent = "Please enter valid positive numbers.";
     model.classList.add("active");
     setTimeout(() => {
@@ -48,4 +61,30 @@ btn.addEventListener("click", (e) => {
     return;
   }
 
+  const months = termValue * 12;
+  let monthlyPayment = 0;
+  let totalRepayment = 0;
+
+  if (type === "Repayment") {
+    const monthlyRate = rateValue / 12;
+
+    if (monthlyRate === 0) {
+      monthlyPayment = amountValue / months;
+
+      totalRepayment = amountValue;
+    } else {
+      monthlyPayment =
+        (amountValue * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+      totalRepayment = monthlyPayment * months;
+    }
+  } else if (type === "Interest only") {
+    monthlyPayment = amountValue * (rateValue / 12);
+    totalRepayment = monthlyPayment * months;
+  }
+
+  const formattedMonthly = formatter.format(monthlyPayment);
+  const formattedTotal = formatter.format(totalRepayment);
+
+  result.textContent = formattedMonthly;
+  total.textContent = formattedTotal;
 });

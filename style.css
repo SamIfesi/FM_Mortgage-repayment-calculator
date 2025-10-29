@@ -274,28 +274,53 @@ input::-webkit-inner-spin-button {
   left: 0%;
   padding: 2rem;
 }
-.model-container{
+.model-container {
   background: var(--Slate-700);
   color: var(--White);
   padding: 1rem;
   border-radius: 1rem;
   opacity: 0;
   transform: translateY(-10rem);
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
-.active{
-  transform: translateY(-.8rem);
+.show{
+  color: var(--Lime);
+}
+.active {
+  transform: translateY(-0.8rem);
   opacity: 1;
+  z-index: 10;
 }
-
 .hide {
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   opacity: 0;
   pointer-events: none;
   z-index: -1;
 }
-.red-bg{
-  transition: all .3s ease;
+.red-bg {
+  transition: all 0.3s ease;
   background-color: var(--Red);
   color: var(--White);
+}
+@media (max-width: 500px) {
+  body{
+    height: auto;
+    overflow: auto;
+    padding: 0 1.5rem;
+  }
+  .container {
+    flex-direction: column;
+  }
+  .right {
+    border-radius: 0;
+  }
+  .btn{
+    align-self: center;
+    justify-self: center;
+  }
+.active {
+  transform: translateY(1.5rem);
+  opacity: 1;
+  z-index: 10;
+}
 }
